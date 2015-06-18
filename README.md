@@ -1,15 +1,43 @@
-Step by step instructions to publish a new ASteCA release.
+## ASteCA new release
 
-# New release steps
+Steps detailing how to publish a new release after the development on the
+active branch is completed.
 
-### Publish new release after development on active branch is completed
+### 1. Update input parameters files
+
+1. Move *used* `*_input.dat` files into the `def_params/` folder.
+
+1. Move *default* `*_input.dat` files into the top level folder and rename them
+removing the initial `d_` from their names.
+
+1. Remove files from `--assume-unchanged` so they will be tracked:
+  ````
+  git update-index --no-assume-unchanged *_input.dat
+  ````
+
+1. Push changes on both these files (if any):
+  ````
+  git acp 'update input files'   # acp --> add + commit + push
+  ````
+
+1. Stop tracking these files again:
+  ````
+  git update-index --assume-unchanged *_input.dat
+  ````
+
+1. Rename adding `d_` to the beginning of both files (`d_*_input.dat`) and move
+them into the `def_params/` folder again.
+
+1. Move used `*_input.dat` files back to the top level.
+
+### 2. Create new release
 
 1. Add the changes made in latest release to `CHANGELOG.md` file. **Remember to
 link the issues with markdown.**
 
 1. Push above changes to `CHAGELOG.md` file:
   ````
-  git acp 'update changelog'   # acp --> add + commit + push
+  git acp 'update changelog'
   ````
 
 1. Remove _beta_ from version number in `__init.py__`.
@@ -30,7 +58,7 @@ branch and push the new branch upstream:
   to track the new remote
   ````
 
-1. Merge new `vxxx` branch into `master` branch:
+1. Merge new `vxxx` branch into `master` branch (there should be no conflicts):
   ````
   git rebase master
   git co master       # co --> checkout
@@ -48,20 +76,32 @@ branch and push the new branch upstream:
   git push --tags
   ````
 
-1. Link draft release with new tag in Github and publish.
+1. Link draft release with new tag in Github and publish. **New version is
+now fully released**.
 
    https://github.com/asteca/asteca/releases
+
+### 3. Update site and docs
 
 1. Add new published version to `index.html` file in:
 
    http://asteca.github.io
 
-1. Push above changes made to the site. **New version is now fully released**.
+1. Push above changes made to the site.
   ````
   git acp 'release vx.x.x'
   ````
 
-### Create new active branch
+1. Add new version to `conf.py` file in docs.
+
+1. Make any necessary changes/additions to the docs.
+
+1. Push above changes made to the docs.
+  ````
+  git acp 'release vx.x.x'
+  ````
+
+### 4. Create new active branch
 
 1. Create new `active` branch locally, branched from `master`:
   ````
