@@ -7,28 +7,25 @@ active branch is completed.
 
 1. Move *used* `*_input.dat` files into the `def_params/` folder.
 
-1. Move *default* `*_input.dat` files into the top level folder and rename them
+1. Move `isochrones/parsec12_ubvrijhk/` folder into the `def_params/` folder
+(or simply rename it)
+
+1. Copy *default* `*_input.dat` files into the top level folder and rename them
 removing the initial `d_` from their names.
 
-1. Remove files from `--assume-unchanged` so they will be tracked:
+1. Copy `parsec12_ubvrijhk/` folder from `def_params/` into the `isochrones/`
+folder.
+
+1. Remove all files from `--assume-unchanged` so they will be tracked:
   ````
   git update-index --no-assume-unchanged *_input.dat
+  git update-index --no-assume-unchanged isochrones/parsec12_ubvrijhk/*.dat
   ````
 
-1. Push changes on both these files (if any):
+1. Push changes on all these files (if any):
   ````
-  git acp 'update input files'   # acp --> add + commit + push
+  git acp 'update input files + isochs'   # acp --> add + commit + push
   ````
-
-1. Stop tracking these files again:
-  ````
-  git update-index --assume-unchanged *_input.dat
-  ````
-
-1. Rename adding `d_` to the beginning of both files (`d_*_input.dat`) and move
-them into the `def_params/` folder again.
-
-1. Move used `*_input.dat` files back to the top level.
 
 ### 2. Create new release
 
@@ -102,6 +99,19 @@ now fully released**.
   ````
 
 ### 4. Create new active branch
+
+1. Set `--assume-unchanged` for the `*_input.dat` files and the default
+metallicity files `parsec12_ubvrijhk/*.dat`.
+  ````
+  git update-index --assume-unchanged *_input.dat
+  git update-index --assume-unchanged isochrones/parsec12_ubvrijhk/*.dat
+  ````
+
+1. Delete/rename both `*_input.dat` files and the default isochrone files
+(or not)
+
+1. Bring back to the top level the *used* `*_input.dat` files and put back
+in place the `parsec12_ubvrijhk/` folder (or not)
 
 1. Create new `active` branch locally, branched from `master`:
   ````
