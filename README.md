@@ -10,7 +10,7 @@ active branch is completed.
 1. Move `isochrones/parsec12_ubvrijhk/` folder into the `def_params/` folder
 (or simply rename it)
 
-1. Copy *default* `*_input.dat` files into the top level folder and rename them
+1. Move *default* `*_input.dat` files into the top level folder and rename them
 removing the initial `d_` from their names.
 
 1. Copy `parsec12_ubvrijhk/` folder from `def_params/` into the `isochrones/`
@@ -80,27 +80,7 @@ now fully released**.
 
    https://github.com/asteca/asteca/releases
 
-### 3. Update site and docs
-
-1. Add new published version to `index.html` file in:
-
-   http://asteca.github.io
-
-1. Push above changes made to the site.
-  ````
-  git acp 'release vx.x.x'
-  ````
-
-1. Add new version to `conf.py` file in docs.
-
-1. Make any necessary changes/additions to the docs.
-
-1. Push above changes made to the docs.
-  ````
-  git acp 'release vx.x.x'
-  ````
-
-### 4. Create new active branch
+### 3. Create new active branch
 
 1. Set `--assume-unchanged` for the `*_input.dat` files and the default
 metallicity files `parsec12_ubvrijhk/*.dat`.
@@ -108,6 +88,9 @@ metallicity files `parsec12_ubvrijhk/*.dat`.
   git update-index --assume-unchanged *_input.dat
   git update-index --assume-unchanged isochrones/parsec12_ubvrijhk/*.dat
   ````
+
+1. Copy possibly modified `*_input.dat` files  into the `def_params/` folder
+adding a `d_` to their names. Same with the default isochrone files.
 
 1. Delete/rename both `*_input.dat` files and the default isochrone files
 (or not)
@@ -131,4 +114,24 @@ in place the `parsec12_ubvrijhk/` folder (or not)
 1. Push beta version number (first commit in branch):
   ````
   git acp 'beta version'
+  ````
+
+### 4. Update site and docs
+
+1. Add new published version to `index.html` file in:
+
+   http://asteca.github.io
+
+1. Push above changes made to the site.
+  ````
+  git acp 'release vx.x.x'
+  ````
+
+1. Add new version to `conf.py` file in docs.
+
+1. Make any necessary changes/additions to the docs.
+
+1. Push above changes made to the docs.
+  ````
+  git acp 'release vx.x.x'
   ````
