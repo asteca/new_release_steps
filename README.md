@@ -22,6 +22,8 @@ folder.
   git update-index --no-assume-unchanged isochrones/parsec12_ubvrijhk/*.dat
   ````
 
+1. Make any necessary changes to `*_input.dat` files and/or isochrones.
+
 1. Push changes on all these files (if any):
   ````
   git acp 'update input files + isochs'   # acp --> add + commit + push
