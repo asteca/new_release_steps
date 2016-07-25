@@ -1,67 +1,68 @@
 ## ASteCA new release
 
 Steps detailing how to publish a new release after the development on the
-active branch is completed.
+`develop` branch is completed. We follow the [git-flow][1] branching
+model.
 
-### 1. Update input parameters files
+### 1. Update .first_run file
 
-1. Move *used* `*_input.dat` files into the `def_params/` folder.
-
-1. Move `isochrones/parsec12_ubvrijhk/` folder into the `def_params/` folder
-(or simply rename it)
-
-1. Move *default* `*_input.dat` files into the top level folder and rename them
-removing the initial `d_` from their names.
-
-1. Copy `parsec12_ubvrijhk/` folder from `def_params/` into the `isochrones/`
-folder.
-
-1. Remove all files from `--assume-unchanged` so they will be tracked:
+1. If this file needs to be modified, remove it from `--skip-worktree` so
+that it will be tracked:
   ````
-  git update-index --no-assume-unchanged *_input.dat
-  git update-index --no-assume-unchanged isochrones/parsec12_ubvrijhk/*.dat
+  git update-index --no-skip-worktree packages/.first_run
   ````
 
-1. Make any necessary changes to `*_input.dat` files and/or isochrones.
+1. Make any necessary changes to this file.
 
-1. Push changes on all these files (if any):
+1. Push changes (if any):
   ````
-  git acp 'update input files + isochs'   # acp --> add + commit + push
+  # acp --> alias for 'add + commit + push'
+  git acp 'update first_run file'
   ````
 
-### 2. Create new release
+1. Ignore again:
+  ````
+  git update-index --skip-worktree packages/.first_run
+  ````
 
-1. Add the changes made in latest release to `CHANGELOG.md` file. **Remember to
-link the issues with markdown.**
+### 2. Create `release` branch
+
+1. Create a new `release` branch from `develop`. Set `<version>` to the
+version number that will be released.
+
+  ````
+  # co --> alias for checkout
+  git co -b release-<version> develop
+  ````
+
+### 3. Prepare new release
+
+1. Add the changes made from latest release to `CHANGELOG.md` file.
+**Remember to link the issues with markdown.**
 
 1. Push above changes to `CHAGELOG.md` file:
   ````
   git acp 'update changelog'
   ````
 
-1. Remove _beta_ from version number in `__init.py__`.
-  > __version__ = "vx.x.x-beta" --> __version__ = "vx.x.x"
+1. Add version number `<version>` to `_version.py` file:
+  > __version__ = "vx.x.x"
 
 1. Push above edit. This is the *last commit* in the branch before the final
 release, **check carefully.**
   ````
-  git acp 'up version'
+  git acp 'Bumped version number to <version>'
   ````
 
-1. Rename `active` branch to new `vxxx` version name, delete old `active`
-branch and push the new branch upstream:
-  ````
-  git branch -m active vxxx             # Rename branch locally
-  git push origin :active               # Delete the old branch
-  git push --set-upstream origin vxxx   # Push the new branch, set local branch
-  to track the new remote
-  ````
+1. If some last minute change is necessary, **do it now**.
 
-1. Merge new `vxxx` branch into `master` branch (there should be no conflicts):
+### 4. Finish `release` branch
+
+1. Merge `release-<version>` branch into `master` branch (there should be
+no conflicts):
   ````
-  git rebase master
-  git co master       # co --> checkout
-  git merge vxxx
+  git co master
+  git merge --no-ff release-<version>
   ````
 
 1. Push merged `master` branch:
@@ -71,52 +72,33 @@ branch and push the new branch upstream:
 
 1. Tag this new release `vx.x.x` and push new tag:
   ````
-  git tag vx.x.x
+  git tag -a vx.x.x
   git push --tags
   ````
+
+### 5. Remove `release` branch
+
+1. Merge `release` branch back into `develop`. If this leads to a merge
+conflict, fix it and commit.
+  ````
+  git co develop
+  git merge --no-ff release-<version>
+  ````
+
+1. Remove `release` branch:
+  ````
+  git branch -d release-<version>
+  ````
+
+### 6. Release in Github
 
 1. Link draft release with new tag in Github and publish. **New version is
 now fully released**.
 
    https://github.com/asteca/asteca/releases
 
-### 3. Create new active branch
 
-1. Set `--assume-unchanged` for the `*_input.dat` files and the default
-metallicity files `parsec12_ubvrijhk/*.dat`.
-  ````
-  git update-index --assume-unchanged *_input.dat
-  git update-index --assume-unchanged isochrones/parsec12_ubvrijhk/*.dat
-  ````
-
-1. Copy possibly modified `*_input.dat` files  into the `def_params/` folder
-adding a `d_` to their names. Same with the default isochrone files.
-
-1. Delete/rename both `*_input.dat` files and the default isochrone files
-(or not)
-
-1. Bring back to the top level the *used* `*_input.dat` files and put back
-in place the `parsec12_ubvrijhk/` folder (or not)
-
-1. Create new `active` branch locally, branched from `master`:
-  ````
-  git co -b active
-  ````
-
-1. Push and track new `active` branch:
-  ````
-  git push --all -u
-  ````
-
-1. Increase version number and set as beta in `__init.py__` file:
-  > __version__ = "vx.x.x" --> __version__ = "v(x.x.x + 1)-beta"
-
-1. Push beta version number (first commit in branch):
-  ````
-  git acp 'beta version'
-  ````
-
-### 4. Update site and docs
+### 7. Update site and docs
 
 1. Add new published version to `index.html` file in:
 
@@ -135,3 +117,7 @@ in place the `parsec12_ubvrijhk/` folder (or not)
   ````
   git acp 'release vx.x.x'
   ````
+
+
+________________________________________________________________________________
+[1]: http://nvie.com/posts/a-successful-git-branching-model/
