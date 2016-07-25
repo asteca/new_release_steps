@@ -20,11 +20,6 @@ that it will be tracked:
   git acp 'update first_run file'
   ````
 
-1. Ignore again:
-  ````
-  git update-index --skip-worktree packages/.first_run
-  ````
-
 ### 2. Create `release` branch
 
 1. Create a new `release` branch from `develop`. Set `<version>` to the
@@ -66,7 +61,7 @@ no conflicts):
   git merge --no-ff release-<version>
   ````
 
-1. Push merged `master` branch:
+1. Push merged `master` branch????
   ````
   git push
   ````
@@ -89,6 +84,16 @@ conflict, fix it and commit.
 1. Remove `release` branch:
   ````
   git branch -d release-<version>
+  ````
+
+1. Push changes in `develop`???
+  ````
+  git push
+  ````
+
+1. Ignore `.first_run` file again:
+  ````
+  git update-index --skip-worktree packages/.first_run
   ````
 
 ### 6. Release in Github
