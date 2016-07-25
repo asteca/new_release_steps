@@ -40,18 +40,19 @@ version number that will be released.
 1. Add the changes made from latest release to `CHANGELOG.md` file.
 **Remember to link the issues with markdown.**
 
-1. Push above changes to `CHAGELOG.md` file:
+1. Add & commit above changes to `CHAGELOG.md` file:
   ````
-  git acp 'update changelog'
+  # ac --> alias for 'add + commit'
+  git ac 'update changelog'
   ````
 
 1. Add version number `<version>` to `_version.py` file:
   > __version__ = "vx.x.x"
 
-1. Push above edit. This is the *last commit* in the branch before the final
-release, **check carefully.**
+1. Add & commit above edit. This is the *last commit* in the branch before the
+final release, **check carefully.**
   ````
-  git acp 'Bumped version number to <version>'
+  git ac 'Bumped version number to <version>'
   ````
 
 1. If some last minute change is necessary, **do it now**.
