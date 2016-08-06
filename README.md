@@ -13,7 +13,7 @@ model (also described [here][2]).
   git push --set-upstream origin feat/issue5
   ````
 
-### 2. After work on feature is finished, merge into develop.
+### 2. After feature is finished, merge into develop.
   ````
   git co develop
   git merge --no-ff feat/issue5
@@ -37,19 +37,14 @@ and commit.
   git ac 'update first_run file'
 ````
 
-1. Add the changes made since latest release to `CHANGELOG.md` file.
+1. Add & commit the changes made since latest release to `CHANGELOG.md` file.
 **Remember to link the issues with markdown.**
-
-1. Add & commit above changes to `CHAGELOG.md` file:
   ````
   git ac 'update changelog'
   ````
 
-1. Add version number `<version>` to `_version.py` file:
-  > __version__ = "vx.x.x"
-
-1. Add & commit above edit. This is the *last commit* in the branch before the
-final release, **check carefully.**
+1. Add & commit version number `<version>` to `_version.py` file. This is the
+*last commit* in the branch before the final release, **check carefully.**
   ````
   git ac 'Bumped version number to <version>'
   ````
@@ -116,4 +111,4 @@ now fully released**.
 
 ________________________________________________________________________________
 [1]: http://nvie.com/posts/a-successful-git-branching-model/
-[2]: https://www.atlassian.com/git/tutorials/comparing-workflows/feature-branch-workflow
+[2]: https://www.atlassian.com/git/tutorials/comparing-workflows/gitflow-workflow
