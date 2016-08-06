@@ -13,7 +13,7 @@ model (also described [here][2]).
   git push --set-upstream origin feat/issue5
   ````
 
-### 2. After feature is finished, merge into develop.
+### 2. After feature is finished, merge into `develop`.
   ````
   git co develop
   git merge --no-ff feat/issue5
@@ -61,7 +61,7 @@ and commit.
   git push
   ````
 
-1. Merge `release` branch back into `develop`, and delete.
+1. Merge `release` branch into `develop`, and delete.
   ````
   git co develop
   git merge --no-ff release-<version>
