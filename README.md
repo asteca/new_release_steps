@@ -27,19 +27,15 @@ model (also described [here][2]).
   git co -b release-<version> develop
   ````
 
-#### 1. (Optional) Update .first_run file
-
-  1. If this file needs to be modified, remove it from `--skip-worktree` so
-  that it will be tracked:
-    ````
-    git update-index --no-skip-worktree packages/.first_run
-    ````
-
-  1. Make any necessary changes to this file and commit.
-    ````
-    # ac  --> alias for 'add + commit'
-    git ac 'update first_run file'
+1. **Optional** Update .first_run file if it needs to be modified. Remove it
+from `--skip-worktree` so that it will be tracked. Make any necessary changes
+and commit.
   ````
+  # Track again
+  git update-index --no-skip-worktree packages/.first_run
+  # Make changes and commit. ac  --> alias for 'add + commit'
+  git ac 'update first_run file'
+````
 
 1. Add the changes made since latest release to `CHANGELOG.md` file.
 **Remember to link the issues with markdown.**
