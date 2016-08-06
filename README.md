@@ -1,43 +1,51 @@
-## ASteCA new release
+## ASteCA branching model
 
 Steps detailing how to publish a new release after the development on the
 `develop` branch is completed. We follow the [git-flow][1] branching
-model.
+model (also described [here][2]).
 
-### 1. Update .first_run file
 
-1. If this file needs to be modified, remove it from `--skip-worktree` so
-that it will be tracked:
+### 1. Create branch from `develop` to work on a given feature.
   ````
-  git update-index --no-skip-worktree packages/.first_run
-  ````
-
-1. Make any necessary changes to this file.
-
-1. Push changes (if any):
-  ````
-  # acp --> alias for 'add + commit + push'
-  git acp 'update first_run file'
+  # Checkout from develop branch; co --> alias for checkout
+  git co -b feat/issue5
+  # Push and track feature branch
+  git push --set-upstream origin feat/issue5
   ````
 
-### 2. Create `release` branch
-
-1. Create a new `release` branch from `develop`. Set `<version>` to the
-version number that will be released.
-
+### 2. After work on feature is finished, merge into develop.
   ````
-  # co --> alias for checkout
+  git co develop
+  git merge --no-ff feat/issue5
+  git push
+  # Delete local branch
+  git branch -d feat/issue5
+  ````
+
+### 3. After work on `develop` branch is done, create `release` branch.
+  ````
   git co -b release-<version> develop
   ````
 
-### 3. Prepare new release
+#### 1. (Optional) Update .first_run file
 
-1. Add the changes made from latest release to `CHANGELOG.md` file.
+  1. If this file needs to be modified, remove it from `--skip-worktree` so
+  that it will be tracked:
+    ````
+    git update-index --no-skip-worktree packages/.first_run
+    ````
+
+  1. Make any necessary changes to this file and commit.
+    ````
+    # ac  --> alias for 'add + commit'
+    git ac 'update first_run file'
+  ````
+
+1. Add the changes made since latest release to `CHANGELOG.md` file.
 **Remember to link the issues with markdown.**
 
 1. Add & commit above changes to `CHAGELOG.md` file:
   ````
-  # ac --> alias for 'add + commit'
   git ac 'update changelog'
   ````
 
@@ -52,43 +60,28 @@ final release, **check carefully.**
 
 1. If some last minute change is necessary, **do it now**.
 
-### 4. Finish `release` branch
 
-1. Merge `release-<version>` branch into `master` branch (there should be
-no conflicts):
+### 4. Finish `release` branch.
+
+1. Merge `release` branch into `master`.
   ````
   git co master
   git merge --no-ff release-<version>
+  git push
   ````
 
-1. Push merged `master` branch????
+1. Merge `release` branch back into `develop`, and delete.
   ````
+  git co develop
+  git merge --no-ff release-<version>
   git push
+  git branch -d release-<version>
   ````
 
 1. Tag this new release `vx.x.x` and push new tag:
   ````
-  git tag -a vx.x.x
+  git tag vx.x.x
   git push --tags
-  ````
-
-### 5. Remove `release` branch
-
-1. Merge `release` branch back into `develop`. If this leads to a merge
-conflict, fix it and commit.
-  ````
-  git co develop
-  git merge --no-ff release-<version>
-  ````
-
-1. Remove `release` branch:
-  ````
-  git branch -d release-<version>
-  ````
-
-1. Push changes in `develop`???
-  ````
-  git push
   ````
 
 1. Ignore `.first_run` file again:
@@ -96,7 +89,7 @@ conflict, fix it and commit.
   git update-index --skip-worktree packages/.first_run
   ````
 
-### 6. Release in Github
+### 5. Release in Github
 
 1. Link draft release with new tag in Github and publish. **New version is
 now fully released**.
@@ -104,7 +97,7 @@ now fully released**.
    https://github.com/asteca/asteca/releases
 
 
-### 7. Update site and docs
+### 6. Update site and docs
 
 1. Add new published version to `index.html` file in:
 
@@ -127,3 +120,4 @@ now fully released**.
 
 ________________________________________________________________________________
 [1]: http://nvie.com/posts/a-successful-git-branching-model/
+[2]: https://www.atlassian.com/git/tutorials/comparing-workflows/feature-branch-workflow
