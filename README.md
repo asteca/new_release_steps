@@ -151,6 +151,16 @@ and testing ASteCA.
   pip install -r requirements.txt
   ````
 
+1. To run with Sublime plus the Anaconda plugin, check that the
+`status-sublime-project` file has the correct interpreter:
+  ````
+  "python_interpreter": "/home/gabriel/.pyenv/versions/asteca-env/bin/python"
+  ````
+
+1. To run with Sublime + the SublimeREPL plugin, follow the instructions in
+this answer:
+  * http://stackoverflow.com/a/25002696/1391441
+
 
 ## Anaconda virtual environment
 
