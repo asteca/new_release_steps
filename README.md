@@ -109,6 +109,106 @@ now fully released**.
   ````
 
 
+## pyenv virtual environment
+
+Set up a [pyenv][3] virtual environment (via [pyenv-virtualenv][4]) for running
+and testing ASteCA.
+
+1. Install pyenv and pyenv-virtualenv:
+  ````
+  git clone git://github.com/yyuu/pyenv.git ~/.pyenv
+  git clone https://github.com/yyuu/pyenv-virtualenv.git ~/.pyenv/plugins/pyenv-virtualenv
+  ````
+
+1. Install latest Python versions:
+  ````
+  pyenv install 2.7.12
+  pyenv install 3.5.2
+  ````
+
+1. Check installed versions (system plus the two just installed should show)
+  ````
+  pyenv versions
+  ```` 
+
+1. Change directory into ASteCA/ folder
+  ````
+  cd ASteca
+  ````
+
+1. Create virtual environment within this folder
+  ````
+  pyenv virtualenv 2.7.12 asteca-env
+  ````
+
+1. Activate virtual environment within this folder
+  ````
+  pyenv activate asteca-env
+  ````
+
+1. Install required packages
+  ````
+  pip install -r requirements.txt
+  ````
+
+
+## Anaconda virtual environment
+
+1. Download Miniconda from http://conda.pydata.org/miniconda.html
+Install with:
+  ````
+  bash Miniconda3-latest-Linux-x86_64.sh
+  ````
+
+1. Alternatively install Anaconda:
+  * http://conda.pydata.org/docs/install/full.html#linux-anaconda-install
+
+If command `conda` fails with `command not found` error:
+  * https://docs.continuum.io/anaconda/faq#id13
+
+1. Update with:
+  ````
+  conda update conda
+  ````
+
+1. Change directory into ASteCA/:
+  ````
+  cd ASteca
+  ````
+
+1. Create new environment installing all requirements
+  ````
+  conda create -n asteca --file requirements.txt
+  ````
+
+1. Activate `asteca` environment
+  ````
+  source activate asteca
+  ````
+
+1. Install `rpy2` package (https://anaconda.org/r/rpy2)
+  ````
+  conda install -n asteca -c https://conda.anaconda.org/r rpy2
+  ````
+
+1. Install `ks` and dependencies:
+  ````
+  conda install -n asteca -c https://conda.anaconda.org/r r-rcpp
+  conda install -n asteca -c https://conda.anaconda.org/r r-mvtnorm
+  conda install -n asteca -c https://conda.anaconda.org/r r-rgl
+  conda install -n asteca -c https://conda.anaconda.org/bioconda r-ks
+  ````
+
+1. Install `astroML` package (https://anaconda.org/astropy/astroml)
+  ````
+  conda install -n asteca -c https://conda.anaconda.org/astropy astroml
+  ````
+
+1. (Optional) Anaconda Navigator
+ * https://docs.continuum.io/anaconda/navigator
+
 ________________________________________________________________________________
 [1]: http://nvie.com/posts/a-successful-git-branching-model/
 [2]: https://www.atlassian.com/git/tutorials/comparing-workflows/gitflow-workflow
+[3]: https://github.com/yyuu/pyenv.git
+[4]: https://github.com/yyuu/pyenv-virtualenv
