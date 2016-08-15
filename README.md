@@ -114,10 +114,21 @@ now fully released**.
 Set up a [pyenv][3] virtual environment (via [pyenv-virtualenv][4]) for running
 and testing ASteCA.
 
-1. Install pyenv and pyenv-virtualenv:
+1. Install pyenv and pyenv-virtualenv automatically
+(https://github.com/yyuu/pyenv-installer)
+  ````
+  $ curl -L https://raw.githubusercontent.com/yyuu/pyenv-installer/master/bin/pyenv-installer | bash
+  ````
+
+1. Alternatively, install pyenv and pyenv-virtualenv manually with:
   ````
   git clone git://github.com/yyuu/pyenv.git ~/.pyenv
   git clone https://github.com/yyuu/pyenv-virtualenv.git ~/.pyenv/plugins/pyenv-virtualenv
+  ````
+
+1. Update
+  ````
+  pyenv update
   ````
 
 1. Install latest Python versions:
