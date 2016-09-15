@@ -8,20 +8,23 @@ model (also described [here][2]).
 ### 1. Create branch from `develop` to work on a given feature.
   ````
   # Checkout from develop branch; co --> alias for checkout
-  git co -b feat/issue5
+  git co -b feat/<branch>
   # Push and track feature branch
-  git push --set-upstream origin feat/issue5
+  git push --set-upstream origin feat/<branch>
   ````
 
 ### 2. After feature is finished, merge into `develop`.
   ````
+  # Switch to develop
   git co develop
-  git merge --no-ff feat/issue5
-  git push
+  # Merge into develop
+  git merge --no-ff feat/<branch>
   # Delete local branch
-  git branch -d feat/issue5
+  git branch -d feat/<branch>
+  # Push changes
+  git push origin develop
   # Delete remote branch
-  git push origin --delete feat/issue5
+  git push origin --delete feat/<branch>
   ````
 
 ### 3. After work on `develop` branch is done, create `release` branch
