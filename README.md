@@ -20,9 +20,12 @@ model (also described [here][2]).
   git push
   # Delete local branch
   git branch -d feat/issue5
+  # Delete remote branch
+  git push origin --delete feat/issue5
   ````
 
-### 3. After work on `develop` branch is done, create `release` branch.
+### 3. After work on `develop` branch is done, create `release` branch
+ **locally**.
   ````
   git co -b release-<version> develop
   ````
@@ -61,18 +64,18 @@ and commit.
   git push
   ````
 
+1. Tag this new release `vx.x.x` and push new tag:
+  ````
+  git tag vx.x.x
+  git push --tags
+  ````
+
 1. Merge `release` branch into `develop`, and delete.
   ````
   git co develop
   git merge --no-ff release-<version>
   git push
   git branch -d release-<version>
-  ````
-
-1. Tag this new release `vx.x.x` and push new tag:
-  ````
-  git tag vx.x.x
-  git push --tags
   ````
 
 1. Ignore `.first_run` file again:
