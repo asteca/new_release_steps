@@ -1,9 +1,11 @@
-## ASteCA branching model
+# ASteCA branching model
 
 Steps detailing how to publish a new release after the development on the
 `develop` branch is completed. We follow the [git-flow][1] branching
 model (also described [here][2]).
 
+
+## Working on a new feature/issue
 
 ### 1. Create branch from `develop` to work on a given feature
   ````
@@ -13,7 +15,7 @@ model (also described [here][2]).
   git push --set-upstream origin <branch>
   ````
 
-### 2. After feature is finished, merge into `develop`
+### 2. After feature is finished, merge back into `develop`
   ````
   # Switch to develop
   git co develop
@@ -27,14 +29,16 @@ model (also described [here][2]).
   git push origin --delete <branch>
   ````
 
-### 3. After work on `develop` branch is done, create `release` branch locally
-  ````
-  # Create branch **locally**
-  git co -b release-<version> develop
-  ````
+## Publishing a new release
 
-1. **Optional** Update `.first_run`
- file if it needs to be modified. Remove it
+### 1. Create `release` branch, update changelog and version
+
+1. Create `release` branch locally
+    ````
+    git co -b release-<version> develop
+    ````
+
+   **Optional** Update `.first_run` file if it needs to be modified. Remove it
    from `--skip-worktree` so that it will be tracked. Make any necessary changes
    and commit.
     ````
@@ -56,7 +60,7 @@ model (also described [here][2]).
 1. If some last minute change is necessary, **do it now**.
 
 
-### 4. Finish `release` branch
+### 2. Finish `release` branch
 
 1. Merge `release` branch into `master` and push.
     ````
@@ -76,20 +80,20 @@ model (also described [here][2]).
     git push
     git branch -d release-<version>
     ````
-1. **Optional** Ignore `.first_run` file again.
+   **Optional** Ignore `.first_run` file again.
     ````
     git update-index --skip-worktree packages/.first_run
     ````
 
-### 5. Release in Github
+### 3. Release in Github
 
-Link draft release with new tag in Github and publish. **New version is
-now fully released**.
+Link draft release with new tag in Github and publish
+(https://github.com/asteca/asteca/releases).
 
-   https://github.com/asteca/asteca/releases
+**New version is now fully released**.
 
 
-### 6. Update site and docs
+### 4. Update site and docs
 
 1. Add new published version to `index.html` file in:
 
@@ -109,6 +113,6 @@ now fully released**.
     git acp 'release vx.x.x'
     ````
 
-________________________________________________________________________________
+
 [1]: http://nvie.com/posts/a-successful-git-branching-model/
 [2]: https://www.atlassian.com/git/tutorials/comparing-workflows/gitflow-workflow
