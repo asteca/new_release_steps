@@ -21,12 +21,12 @@ model (also described [here][2]).
   git co develop
   # Merge into develop
   git merge --no-ff <branch>
-  # Delete local branch (optional)
-  git branch -d <branch>
   # Push changes
   git push origin develop
   # Delete remote branch (optional)
   git push origin --delete <branch>
+  # Delete local branch (optional)
+  git branch -d <branch>
   ````
 
 ## Publishing a new release
