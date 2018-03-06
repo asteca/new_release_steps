@@ -80,6 +80,12 @@ model (also described [here][2]).
     git push
     git branch -d release-<version>
     ````
+1. Add `dev` to the version number in `_version.py` file. This is the
+   *first commit* in the new  `develop` branch.
+    ````
+    git acp 'mark branch as develop'
+    ````
+
    **Optional** Ignore `.first_run` file again.
     ````
     git update-index --skip-worktree packages/.first_run
