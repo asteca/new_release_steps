@@ -31,6 +31,10 @@ model (also described [here][2]).
 
 ## Publishing a new release
 
+### 0. Check that everything works
+
+Download the `develop` version into a new `conda` encironment, and run to see that everything works as expected.
+
 ### 1. Create `release` branch, update changelog and version
 
 1. Create `release` branch locally
