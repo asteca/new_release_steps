@@ -33,7 +33,9 @@ model (also described [here][2]).
 
 ### 0. Check that everything works
 
-1. Update the CMD photometric systems supported (`CMD_systs.dat` file)
+1. Update the CMD photometric systems supported via the `CMDphotsysts` script:
+   * `../packages/defvals/phot_systs.dat`
+   * `../packages/inp/CMD_systs.dat`
 1. Download the `develop` version into a new `conda` environment, and run to
    see that everything works as expected.
 
