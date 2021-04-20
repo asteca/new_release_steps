@@ -9,10 +9,13 @@ model (also described [here][2]).
 
 ### 1. Create branch from `develop` to work on a given feature
   ````
-  # Checkout from develop branch; co --> alias for checkout
-  git co -b <branch>
+  # Checkout from develop branch
+  git checkout -b <branch>
   # Push and track feature branch
   git push --set-upstream origin <branch>
+
+  # Alias
+  git newbr <branch>
   ````
 
 ### 2. After feature is finished, merge back into `develop`
@@ -27,6 +30,9 @@ model (also described [here][2]).
   git push origin --delete <branch>
   # Delete local branch (optional)
   git branch -d <branch>
+
+  # Alias
+  git mergebr <branch>
   ````
 
 ## Publishing a new release
