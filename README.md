@@ -35,14 +35,17 @@ model (also described [here][2]).
   git mergebr <branch>
   ````
 
+
+
+
 ## Publishing a new release
 
-### 0. Check that everything works
+### 0. Check packages versions
 
-1. Update the CMD photometric systems supported via the `CMDphotsysts` script:
-   * `../packages/inp/CMD_systs.dat`
-1. Download the `develop` version into a new `conda` environment, and run to
-   see that everything works as expected. **THIS IS IMPORTANT**
+1. Create a new `conda` environment from scratch with the latest versions of all packages. Download the `develop` version and run in this new environment to see that everything works as expected. **THIS IS IMPORTANT**
+
+2. Save the version of the required packages for later.
+
 
 ### 1. Create `release` branch, update changelog and version
 
@@ -73,6 +76,7 @@ model (also described [here][2]).
 1. If some last minute change is necessary, **do it now**.
 
 
+
 ### 2. Finish `release` branch
 
 1. Merge `release` branch into `master` and push.
@@ -81,11 +85,13 @@ model (also described [here][2]).
     git merge --no-ff release-<version>
     git push
     ````
+
 1. Tag this new release `vx.x.x` and push new tag.
     ````
     git tag vx.x.x
     git push --tags
     ````
+
 1. Merge `release` branch into `develop`, and delete.
     ````
     git co develop
@@ -93,6 +99,7 @@ model (also described [here][2]).
     git push
     git branch -d release-<version>
     ````
+
 1. Add `dev` to the version number in `_version.py` file. This is the
    *first commit* in the new  `develop` branch.
     ````
@@ -103,6 +110,8 @@ model (also described [here][2]).
     ````
     git update-index --skip-worktree packages/.first_run
     ````
+
+
 
 ### 3. Release in Github
 
